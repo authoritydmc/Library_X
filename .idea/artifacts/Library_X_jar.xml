@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Library_X:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Library_X_jar</output-path>
+    <root id="archive" name="Library_X.jar">
+      <element id="module-output" name="Library_X" />
+      <element id="extracted-dir" path="E:/JAVA Tools/jfoenix-8.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/mysql-connector-java-8.0.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/gson-2.3.1_2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/derby.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/derbyclient.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/fontawesomefx-fontawesome-4.7.0-5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/fontawesomefx-commons-8.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="E:/JAVA Tools/commons-codec-1.11.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
