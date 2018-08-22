@@ -1,2 +1,7 @@
-# Library_X
-well this Project is an enhancement over Library Management System developed By afsal Villain .
+LIB_X
+Library Management System .
+Library:
+mysql-connector
+apache-common-codec
+fontawesomefx
+jfoenix-8.0.5
