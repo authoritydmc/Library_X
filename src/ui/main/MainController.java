@@ -155,13 +155,11 @@ public class MainController implements Initializable, BookReturnCallback {
 
     @FXML
     void handleminimize(MouseEvent event) {
-        System.out.println("minimize");
         getStage().setIconified(true);
     }
 
     @FXML
     void handleExit(MouseEvent event) {
-        System.out.println("Exit");
         exit(0);
     }
 
@@ -169,7 +167,6 @@ public class MainController implements Initializable, BookReturnCallback {
     void handleDragPress(MouseEvent event) {
         OffSetY = event.getSceneY();
         OffsetX = event.getSceneX();
-        System.out.println("pressed " + OffsetX + " " + OffSetY);
     }
 
     @FXML
