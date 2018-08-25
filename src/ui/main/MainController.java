@@ -14,7 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +30,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ui.callback.BookReturnCallback;
 import ui.issuedlist.IssuedListController;
+import ui.listbook.BookListController;
 import ui.main.toolbar.ToolbarController;
 import util.LibraryAssistantUtil;
 
@@ -60,7 +64,8 @@ public class MainController implements Initializable, BookReturnCallback {
 
     @FXML
     private JFXTextField bookcategory;
-
+    @FXML
+    private TableView<BookListController.Book> querytable;
     @FXML
     private JFXTextField bookyear;
     @FXML
@@ -126,7 +131,21 @@ public class MainController implements Initializable, BookReturnCallback {
     @FXML
     private JFXTabPane mainTabPane;
     @FXML
-    private JFXButton btnIssue;
+    private JFXButton btnIssue, btnload;
+    @FXML
+    private TableColumn<BookListController.Book, String> titleCol;
+    @FXML
+    private TableColumn<BookListController.Book, String> idCol;
+    @FXML
+    private TableColumn<BookListController.Book, String> authorCol;
+    @FXML
+    private TableColumn<BookListController.Book, String> publisherCol;
+    @FXML
+    private TableColumn<BookListController.Book, Boolean> availabilityCol;
+    @FXML
+    private TableColumn<BookListController.Book, Integer> yearCol;
+    @FXML
+    private TableColumn<BookListController.Book, String> deptCol;
     private double OffsetX, OffSetY = 0;
     private boolean maxed = false;
 
@@ -144,6 +163,23 @@ public class MainController implements Initializable, BookReturnCallback {
         rootPane.getScene().getWindow().setY(event.getScreenY() - OffSetY);
     }
 
+    @FXML
+    void loadquerytable(ActionEvent event) {
+        ObservableList<BookListController.Book> list = FXCollections.observableArrayList();
+
+        list.clear();
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
+        yearCol.setCellValueFactory(new PropertyValueFactory<>("year"));
+        deptCol.setCellValueFactory(new PropertyValueFactory<>("dept"));
+        System.out.println("Implement it");
+        String book_title = getbooktitle.getText();
+        String department = bookcategory.getText();
+        String year = bookyear.getText();
+    }
     @FXML
     void handlemaximize(MouseEvent event) {
 

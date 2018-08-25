@@ -53,6 +53,10 @@ public class BookListController implements Initializable {
     @FXML
     private TableColumn<Book, Boolean> availabilityCol;
     @FXML
+    private TableColumn<Book, Integer> yearCol;
+    @FXML
+    private TableColumn<Book, String> deptCol;
+    @FXML
     private AnchorPane contentPane;
 
     @Override
@@ -71,6 +75,8 @@ public class BookListController implements Initializable {
         authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
+        yearCol.setCellValueFactory(new PropertyValueFactory<>("year"));
+        deptCol.setCellValueFactory(new PropertyValueFactory<>("dept"));
     }
 
     private void loadData() {
@@ -86,8 +92,9 @@ public class BookListController implements Initializable {
                 String id = rs.getString("id");
                 String publisher = rs.getString("publisher");
                 Boolean avail = rs.getBoolean("isAvail");
-
-                list.add(new Book(titlex, id, author, publisher, avail));
+                int year = rs.getInt("year");
+                String dept = rs.getString("dept");
+                list.add(new Book(titlex, id, author, publisher, avail, year, dept));
 
             }
         } catch (SQLException ex) {
@@ -179,8 +186,10 @@ public class BookListController implements Initializable {
         private final SimpleStringProperty author;
         private final SimpleStringProperty publisher;
         private final SimpleStringProperty availabilty;
+        private final SimpleStringProperty year;
+        private final SimpleStringProperty dept;
 
-        public Book(String title, String id, String author, String pub, Boolean avail) {
+        public Book(String title, String id, String author, String pub, Boolean avail, int year, String dept) {
             this.title = new SimpleStringProperty(title);
             this.id = new SimpleStringProperty(id);
             this.author = new SimpleStringProperty(author);
@@ -190,6 +199,24 @@ public class BookListController implements Initializable {
             } else {
                 this.availabilty = new SimpleStringProperty("Issued");
             }
+            this.year = new SimpleStringProperty(String.valueOf(year));
+            this.dept = new SimpleStringProperty(dept);
+        }
+
+        public String getYear() {
+            return year.get();
+        }
+
+        public SimpleStringProperty yearProperty() {
+            return year;
+        }
+
+        public String getDept() {
+            return dept.get();
+        }
+
+        public SimpleStringProperty deptProperty() {
+            return dept;
         }
 
         public String getTitle() {

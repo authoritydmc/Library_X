@@ -75,6 +75,7 @@ public class LoginController implements Initializable {
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
             stage.setScene(scene);
+
             stage.show();
 
 
