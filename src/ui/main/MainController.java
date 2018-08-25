@@ -55,7 +55,14 @@ public class MainController implements Initializable, BookReturnCallback {
     private DatabaseHandler databaseHandler;
     private PieChart bookChart;
     private PieChart memberChart;
+    @FXML
+    private JFXTextField getbooktitle;
 
+    @FXML
+    private JFXTextField bookcategory;
+
+    @FXML
+    private JFXTextField bookyear;
     @FXML
     private HBox book_info;
     @FXML
