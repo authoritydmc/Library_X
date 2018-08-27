@@ -28,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import ui.addbook.BookAddController;
 import ui.callback.BookReturnCallback;
 import ui.issuedlist.IssuedListController;
 import ui.listbook.BookListController;
@@ -165,9 +166,11 @@ public class MainController implements Initializable, BookReturnCallback {
 
     @FXML
     void loadquerytable(ActionEvent event) {
+        boolean flag = false;
         ObservableList<BookListController.Book> list = FXCollections.observableArrayList();
-
+        String query = "";
         list.clear();
+        querytable.setItems(list);
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
@@ -179,6 +182,65 @@ public class MainController implements Initializable, BookReturnCallback {
         String book_title = getbooktitle.getText();
         String department = bookcategory.getText();
         String year = bookyear.getText();
+
+        if (!department.isEmpty() && !year.isEmpty() && !book_title.isEmpty()) {
+            query = "SELECT * FROM BOOK WHERE dept='" + department + "' and year='" + year + "' and title='" + book_title + "'";
+            flag = true;
+
+            flag = true;
+        } else if (!department.isEmpty() && !year.isEmpty())
+
+        {
+            query = "SELECT * FROM BOOK WHERE year=" + year + " and dept='" + department + "'";
+            flag = true;
+
+
+        } else if (!year.isEmpty()) {
+            query = "SELECT * FROM BOOK WHERE year='" + year + "'";
+            flag = true;
+
+        } else if (!book_title.isEmpty()) {
+
+            query = "SELECT * FROM BOOK WHERE title='" + book_title + "'";
+
+        } else if (!department.isEmpty())
+
+        {
+            query = "SELECT * FROM BOOK WHERE dept='" + department + "'";
+            flag = true;
+
+        } else {
+            AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(null), "No input Given ", "Cant Not fetch any details..Try again...");
+            getbooktitle.setText(null);
+            bookcategory.setText(null);
+            bookyear.setText(null);
+            list.clear();
+            querytable.setItems(list);
+            return;
+        }
+        System.out.println(query);
+
+        if (flag) {
+            ResultSet rs = DatabaseHandler.getInstance().execQuery(query);
+            try {
+                while (rs.next()) {
+                    String titlex = rs.getString("title");
+                    String author = rs.getString("author");
+                    String id = rs.getString("id");
+                    String publisher = rs.getString("publisher");
+                    Boolean avail = rs.getBoolean("isAvail");
+                    int year_col = rs.getInt("year");
+                    String dept = rs.getString("dept");
+                    list.add(new BookListController.Book(titlex, id, author, publisher, avail, year_col, dept));
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(BookAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            querytable.setItems(list);
+        }
+
     }
     @FXML
     void handlemaximize(MouseEvent event) {
