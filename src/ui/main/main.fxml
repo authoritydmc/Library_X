@@ -389,11 +389,14 @@
                                                                 <JFXTextField fx:id="bookcategory" labelFloat="true"
                                                                               maxWidth="292.0" minWidth="274.0"
                                                                               prefHeight="38.0" prefWidth="292.0"
-                                                                              promptText="Enter Department/Category"/>
-                                                                <JFXTextField fx:id="bookyear" labelFloat="true"
-                                                                              maxWidth="292.0" minWidth="274.0"
-                                                                              prefHeight="38.0" prefWidth="292.0"
-                                                                              promptText="Enter year"/>
+                                                                              promptText="Enter Department"/>
+                                                                <JFXComboBox fx:id="bookyear" prefHeight="31.0"
+                                                                             prefWidth="223.0" promptText="Enter year"
+                                                                             unFocusColor="#4d4d4dd0">
+                                                                    <HBox.margin>
+                                                                        <Insets bottom="5.0"/>
+                                                                    </HBox.margin>
+                                                                </JFXComboBox>
                                                             </children>
                                                         </HBox>
                                                     </top>

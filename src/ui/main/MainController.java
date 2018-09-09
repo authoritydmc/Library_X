@@ -68,7 +68,7 @@ public class MainController implements Initializable, BookReturnCallback {
     @FXML
     private TableView<BookListController.Book> querytable;
     @FXML
-    private JFXTextField bookyear;
+    private JFXComboBox<String> bookyear;
     @FXML
     private HBox book_info;
     @FXML
@@ -155,6 +155,12 @@ public class MainController implements Initializable, BookReturnCallback {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         databaseHandler = DatabaseHandler.getInstance();
+        bookyear.getItems().add("Select Year");
+        bookyear.getItems().add("1st Year");
+        bookyear.getItems().add("2nd Year");
+        bookyear.getItems().add("3rd Year");
+        bookyear.getItems().add("4th Year");
+
 
         initDrawer();
         initGraphs();
@@ -171,7 +177,8 @@ public class MainController implements Initializable, BookReturnCallback {
         boolean flag = false;
         ObservableList<BookListController.Book> list = FXCollections.observableArrayList();
         String query = "";
-        list.clear();
+
+        String year;
         querytable.setItems(list);
         subcol.setCellValueFactory(new PropertyValueFactory<>("subject"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -183,7 +190,15 @@ public class MainController implements Initializable, BookReturnCallback {
         deptCol.setCellValueFactory(new PropertyValueFactory<>("dept"));
         String subject = getsubject.getText();
         String department = bookcategory.getText();
-        String year = bookyear.getText();
+
+        year = bookyear.getValue();
+        try {
+            if (year.isEmpty()) ;
+            if (year.equals("Select Year")) year = "";
+        } catch (NullPointerException e) {
+            year = "";
+        }
+        System.out.println(year);
         if (!subject.isEmpty() && !department.isEmpty() && !year.isEmpty()) {
             flag = true;
             ///all three case present
@@ -221,7 +236,7 @@ public class MainController implements Initializable, BookReturnCallback {
             AlertMaker.showErrorMessage("NO input Given", "Can not Fetch any items.");
             getsubject.setText("");
             bookcategory.setText("");
-            bookyear.setText("");
+            bookyear.getSelectionModel().clearSelection();
             list.clear();
             querytable.setItems(list);
             return;
