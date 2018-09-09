@@ -14,12 +14,17 @@ public class DataHelper {
     public static boolean insertNewBook(Book book) {
         try {
             PreparedStatement statement = DatabaseHandler.getInstance().getConnection().prepareStatement(
-                    "INSERT INTO BOOK(id,title,author,publisher,isAvail) VALUES(?,?,?,?,?)");
+                    "INSERT INTO BOOK(id,title,author,publisher,isAvail,dept,subject,quantity,year) VALUES(?,?,?,?,?,?,?,?,?)");
             statement.setString(1, book.getId());
             statement.setString(2, book.getTitle());
             statement.setString(3, book.getAuthor());
             statement.setString(4, book.getPublisher());
             statement.setBoolean(5, book.getAvailability());
+            statement.setString(6, book.getDepartment());
+            statement.setString(7, book.getSubejct());
+            statement.setInt(8, book.getQuantity());
+            statement.setString(9, book.getYear());
+
             return statement.executeUpdate() > 0;
         } catch (SQLException ex) {
         }

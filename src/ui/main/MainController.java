@@ -238,7 +238,7 @@ public class MainController implements Initializable, BookReturnCallback {
                     String id = rs.getString("id");
                     String publisher = rs.getString("publisher");
                     Boolean avail = rs.getBoolean("isAvail");
-                    int year_col = rs.getInt("year");
+                    String year_col = rs.getString("year");
                     String dept = rs.getString("dept");
                     String sub = rs.getString("subject");
                     System.out.println(titlex + " " + author + " " + year_col + " " + dept + " " + sub);

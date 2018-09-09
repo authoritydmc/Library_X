@@ -2,6 +2,7 @@ package ui.addbook;
 
 import alert.AlertMaker;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import data.wrapper.Book;
 import database.DataHelper;
@@ -36,6 +37,17 @@ public class BookAddController implements Initializable {
     @FXML
     private JFXTextField publisher;
     @FXML
+    private JFXTextField quantity;
+
+    @FXML
+    private JFXComboBox<String> year;
+
+    @FXML
+    private JFXTextField department;
+
+    @FXML
+    private JFXTextField subject;
+    @FXML
     private JFXButton saveButton;
     @FXML
     private JFXButton cancelButton;
@@ -49,6 +61,11 @@ public class BookAddController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        year.getItems().add("1st Year");
+        year.getItems().add("2nd Year");
+        year.getItems().add("3rd Year");
+        year.getItems().add("4th Year");
+
         databaseHandler = DatabaseHandler.getInstance();
     }
 
@@ -58,12 +75,17 @@ public class BookAddController implements Initializable {
             handleEditOperation();
             return;
         }
+        String bookyear = year.getValue();
+        String bookDept = department.getText();
+        if (quantity.getText().isEmpty()) quantity.setText("1");
+        int bookQuantity = Integer.parseInt(quantity.getText());
+        String bookSubject = subject.getText();
         String bookID = id.getText();
         String bookAuthor = author.getText();
         String bookName = title.getText();
         String bookPublisher = publisher.getText();
 
-        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty() || bookPublisher.isEmpty()) {
+        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty() || bookPublisher.isEmpty() || bookDept.isEmpty() || bookSubject.isEmpty()) {
             AlertMaker.showMaterialDialog(rootPane, mainContainer, new ArrayList<>(), "Insufficient Data", "Please enter data in all fields.");
             return;
         }
@@ -80,7 +102,7 @@ public class BookAddController implements Initializable {
             cancelButton.fire();
         });
 
-        Book book = new Book(bookID, bookName, bookAuthor, bookPublisher, Boolean.TRUE, "NO DESCRIPTION");
+        Book book = new Book(bookID, bookName, bookAuthor, bookPublisher, Boolean.TRUE, "NO DESCRIPTION", bookDept, bookSubject, bookyear, bookQuantity);
         boolean result = DataHelper.insertNewBook(book);
         if (result) {
             AlertMaker.showMaterialDialog(rootPane, mainContainer, Arrays.asList(btn), "New book added", bookName + " has been added");
@@ -114,6 +136,7 @@ public class BookAddController implements Initializable {
         id.setText(book.getId());
         author.setText(book.getAuthor());
         publisher.setText(book.getPublisher());
+
         id.setEditable(false);
         isInEditMode = true;
     }
@@ -127,7 +150,7 @@ public class BookAddController implements Initializable {
 
     private void handleEditOperation() {
 
-        Book book = new Book(id.getText(), title.getText(), author.getText(), publisher.getText(), true, "NO Description");
+        Book book = new Book(id.getText(), title.getText(), author.getText(), publisher.getText(), true, "NO Description", department.getText(), subject.getText(), year.getValue(), Integer.parseInt(quantity.getText()));
         if (databaseHandler.updateBook(book)) {
             AlertMaker.showMaterialDialog(rootPane, mainContainer, new ArrayList<>(), "Success", "Update complete");
         } else {

@@ -2,7 +2,7 @@
 
 <tables>
     <table-entry name="BOOK"
-                 col-data="id varchar(200) primary key,title varchar(200),author varchar(200),publisher varchar(100),isAvail boolean default true,`description` text CHARACTER SET latin1,year int(1) default null,dept varchar(10) default 'CS',subject varchar(30) default 'Data Structure'"/>
+                 col-data="id varchar(200) primary key,title varchar(200),author varchar(200),publisher varchar(100),isAvail boolean default true,`description` text CHARACTER SET latin1,year varchar(10) default null,dept varchar(10) default 'CS',subject varchar(30) ,quantity int (4) default 1"/>
     <table-entry name="MEMBER"
                  col-data="id varchar(200) primary key,name varchar(200),mobile varchar(20),email varchar(100)"/>
     <table-entry name="ISSUE"

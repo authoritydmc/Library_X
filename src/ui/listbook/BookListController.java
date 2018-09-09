@@ -93,7 +93,7 @@ public class BookListController implements Initializable {
                 String publisher = rs.getString("publisher");
                 String sub = rs.getString("subject");
                 Boolean avail = rs.getBoolean("isAvail");
-                int year = rs.getInt("year");
+                String year = rs.getString("year");
                 String dept = rs.getString("dept");
                 list.add(new Book(titlex, id, author, publisher, avail, year, dept, sub));
 
@@ -191,7 +191,7 @@ public class BookListController implements Initializable {
         private final SimpleStringProperty dept;
         private final SimpleStringProperty subject;
 
-        public Book(String title, String id, String author, String pub, Boolean avail, int year, String dept, String sub) {
+        public Book(String title, String id, String author, String pub, Boolean avail, String year, String dept, String sub) {
             this.title = new SimpleStringProperty(title);
             this.subject = new SimpleStringProperty(sub);
             this.id = new SimpleStringProperty(id);
@@ -202,7 +202,7 @@ public class BookListController implements Initializable {
             } else {
                 this.availabilty = new SimpleStringProperty("Issued");
             }
-            this.year = new SimpleStringProperty(String.valueOf(year));
+            this.year = new SimpleStringProperty(year);
             this.dept = new SimpleStringProperty(dept);
         }
 
