@@ -384,13 +384,16 @@
                                                             <children>
                                                                 <JFXTextField fx:id="getsubject" labelFloat="true"
                                                                               maxWidth="292.0" minWidth="274.0"
+                                                                              onAction="#loadquerytable"
                                                                               prefHeight="38.0" prefWidth="292.0"
                                                                               promptText="Enter Subject name"/>
                                                                 <JFXTextField fx:id="bookcategory" labelFloat="true"
                                                                               maxWidth="292.0" minWidth="274.0"
+                                                                              onAction="#loadquerytable"
                                                                               prefHeight="38.0" prefWidth="292.0"
                                                                               promptText="Enter Department"/>
                                                                 <JFXComboBox fx:id="bookyear" prefHeight="31.0"
+                                                                             onAction="#loadquerytable"
                                                                              prefWidth="223.0" promptText="Enter year"
                                                                              unFocusColor="#4d4d4dd0">
                                                                     <HBox.margin>
@@ -411,7 +414,7 @@
                                                                                    onAction="#loadquerytable"
                                                                                    onKeyPressed="#handleIssueButtonKeyPress"
                                                                                    prefHeight="44.0" prefWidth="151.0"
-                                                                                   text="Issue">
+                                                                                   text="Search">
                                                                             <HBox.margin>
                                                                                 <Insets/>
                                                                             </HBox.margin>
