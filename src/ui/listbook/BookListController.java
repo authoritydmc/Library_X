@@ -91,10 +91,11 @@ public class BookListController implements Initializable {
                 String author = rs.getString("author");
                 String id = rs.getString("id");
                 String publisher = rs.getString("publisher");
+                String sub = rs.getString("subject");
                 Boolean avail = rs.getBoolean("isAvail");
                 int year = rs.getInt("year");
                 String dept = rs.getString("dept");
-                list.add(new Book(titlex, id, author, publisher, avail, year, dept));
+                list.add(new Book(titlex, id, author, publisher, avail, year, dept, sub));
 
             }
         } catch (SQLException ex) {
@@ -188,9 +189,11 @@ public class BookListController implements Initializable {
         private final SimpleStringProperty availabilty;
         private final SimpleStringProperty year;
         private final SimpleStringProperty dept;
+        private final SimpleStringProperty subject;
 
-        public Book(String title, String id, String author, String pub, Boolean avail, int year, String dept) {
+        public Book(String title, String id, String author, String pub, Boolean avail, int year, String dept, String sub) {
             this.title = new SimpleStringProperty(title);
+            this.subject = new SimpleStringProperty(sub);
             this.id = new SimpleStringProperty(id);
             this.author = new SimpleStringProperty(author);
             this.publisher = new SimpleStringProperty(pub);
@@ -201,6 +204,18 @@ public class BookListController implements Initializable {
             }
             this.year = new SimpleStringProperty(String.valueOf(year));
             this.dept = new SimpleStringProperty(dept);
+        }
+
+        public String getSubject() {
+            return subject.get();
+        }
+
+        public SimpleStringProperty subjectProperty() {
+            return subject;
+        }
+
+        public void setSubject(String subject) {
+            this.subject.set(subject);
         }
 
         public String getYear() {
