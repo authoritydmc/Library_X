@@ -53,7 +53,7 @@ public class BookListController implements Initializable {
     @FXML
     private TableColumn<Book, Boolean> availabilityCol;
     @FXML
-    private TableColumn<Book, Integer> yearCol;
+    private TableColumn<Book, String> yearCol;
     @FXML
     private TableColumn<Book, String> deptCol;
     @FXML
@@ -95,7 +95,8 @@ public class BookListController implements Initializable {
                 Boolean avail = rs.getBoolean("isAvail");
                 String year = rs.getString("year");
                 String dept = rs.getString("dept");
-                list.add(new Book(titlex, id, author, publisher, avail, year, dept, sub));
+                String quantity = String.valueOf(rs.getInt("quantity"));
+                list.add(new Book(titlex, id, author, publisher, avail, year, dept, sub, quantity));
 
             }
         } catch (SQLException ex) {
@@ -181,6 +182,9 @@ public class BookListController implements Initializable {
     }
 
     public static class Book {
+        private final SimpleStringProperty quantity;
+
+
 
         private final SimpleStringProperty title;
         private final SimpleStringProperty id;
@@ -191,7 +195,7 @@ public class BookListController implements Initializable {
         private final SimpleStringProperty dept;
         private final SimpleStringProperty subject;
 
-        public Book(String title, String id, String author, String pub, Boolean avail, String year, String dept, String sub) {
+        public Book(String title, String id, String author, String pub, Boolean avail, String year, String dept, String sub, String quantity) {
             this.title = new SimpleStringProperty(title);
             this.subject = new SimpleStringProperty(sub);
             this.id = new SimpleStringProperty(id);
@@ -204,6 +208,7 @@ public class BookListController implements Initializable {
             }
             this.year = new SimpleStringProperty(year);
             this.dept = new SimpleStringProperty(dept);
+            this.quantity = new SimpleStringProperty(quantity);
         }
 
         public String getSubject() {
@@ -234,6 +239,13 @@ public class BookListController implements Initializable {
             return dept;
         }
 
+        public String getQuantity() {
+            return quantity.get();
+        }
+
+        public SimpleStringProperty quantityProperty() {
+            return quantity;
+        }
         public String getTitle() {
             return title.get();
         }

@@ -189,14 +189,18 @@ public final class DatabaseHandler {
     public boolean updateBook(Book book) {
         try {
             System.out.println("Updating Book");
-            String update = "UPDATE BOOK SET TITLE=?, AUTHOR=?, PUBLISHER=? ,description=? WHERE ID=? ";
+            String update = "UPDATE BOOK SET TITLE=?, AUTHOR=?, PUBLISHER=? ,description=?,dept=?,year=?,subject=?,quantity=? WHERE ID=? ";
             PreparedStatement stmt = conn.prepareStatement(update);
             stmt.setString(1, book.getTitle());
             stmt.setString(2, book.getAuthor());
             stmt.setString(3, book.getPublisher());
             stmt.setString(4, book.getDescription());
+            stmt.setString(5, book.getDepartment());
+            stmt.setString(6, book.getYear());
+            stmt.setString(7, book.getSubejct());
+            stmt.setInt(8, book.getQuantity());
 
-            stmt.setString(5, book.getId());
+            stmt.setString(9, book.getId());
             System.out.println(stmt);
             int res = stmt.executeUpdate();
             return (res > 0);

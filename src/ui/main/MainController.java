@@ -241,8 +241,9 @@ public class MainController implements Initializable, BookReturnCallback {
                     String year_col = rs.getString("year");
                     String dept = rs.getString("dept");
                     String sub = rs.getString("subject");
+                    Integer quantity = rs.getInt("quantity");
                     System.out.println(titlex + " " + author + " " + year_col + " " + dept + " " + sub);
-                    list.add(new BookListController.Book(titlex, id, author, publisher, avail, year_col, dept, sub));
+                    list.add(new BookListController.Book(titlex, id, author, publisher, avail, year_col, dept, sub, String.valueOf(quantity)));
                     flag = true;
                 }
                 if (!flag) {

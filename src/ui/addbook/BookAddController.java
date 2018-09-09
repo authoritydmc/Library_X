@@ -136,7 +136,9 @@ public class BookAddController implements Initializable {
         id.setText(book.getId());
         author.setText(book.getAuthor());
         publisher.setText(book.getPublisher());
-
+        department.setText(book.getDept());
+        quantity.setText(String.valueOf(book.getQuantity()));
+        subject.setText(book.getSubject());
         id.setEditable(false);
         isInEditMode = true;
     }
