@@ -64,11 +64,12 @@ public class LoginController implements Initializable {
         ((Stage) username.getScene().getWindow()).close();
     }
 
-    void loadMain() {
+    private void loadMain() {
         try {
 
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/ui/main/main.fxml"));
+
             stage.initStyle(StageStyle.TRANSPARENT);
 
             LibraryAssistantUtil.setStageIcon(stage);

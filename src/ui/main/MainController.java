@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -231,7 +232,7 @@ public class MainController implements Initializable, BookReturnCallback {
         }
 
 
-        if (flag == false) {
+        if (!flag) {
 //            AlertMaker.showMaterialDialog(rootPane, rootAnchorPane, Arrays.asList(null), "No input Given ", "Cant Not fetch any details..Try again...");
             AlertMaker.showErrorMessage("NO input Given", "Can not Fetch any items.");
             getsubject.setText("");
@@ -306,6 +307,7 @@ public class MainController implements Initializable, BookReturnCallback {
     void handleDragPress(MouseEvent event) {
         OffSetY = event.getSceneY();
         OffsetX = event.getSceneX();
+
     }
 
     @FXML
@@ -343,13 +345,13 @@ public class MainController implements Initializable, BookReturnCallback {
         }
     }
 
-    void clearBookCache() {
+    private void clearBookCache() {
         bookName.setText("");
         bookAuthor.setText("");
         bookStatus.setText("");
     }
 
-    void clearMemberCache() {
+    private void clearMemberCache() {
         memberName.setText("");
         memberMobile.setText("");
     }
@@ -731,7 +733,8 @@ public class MainController implements Initializable, BookReturnCallback {
 
     @FXML
     public void handleDragDetect(MouseEvent mouseEvent) {
-        rootPane.setOpacity(0.8);
+        rootPane.setOpacity(0.5);
+        rootPane.getScene().setFill(Color.TRANSPARENT);
 
     }
 
